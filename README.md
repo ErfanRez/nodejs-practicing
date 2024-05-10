@@ -1,1 +1,1 @@
-In this repository, I combined all my practice projects using pure NodeJS, Express, and Fastify from the very basic API development to documenting, WebSockets, GraphQL, MicroServices, developing telegram bots, and more in one place. Hope you enjoy it 😉.
+In this repository, I combined all my practice projects using pure NodeJS, Express, and Fastify from the very basic API development to documenting, WebSockets, GraphQL, MicroServices, developing telegram bots, and more, all in one repo. Hope you enjoy it 😉.
