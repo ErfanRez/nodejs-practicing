@@ -7,7 +7,7 @@ console.log(buff);
 console.log(buff[0]); // = 'N' decimal unicode = 78
 console.log("N".codePointAt(0)); // = 'N' decimal unicode = 78
 console.log("N".charCodeAt(0)); // = 'N' decimal unicode = 78
-console.log("N".codePointAt(0).toString(16)); // first- decimal unicode is 78 then converts to hex value in string format 4e
+console.log("N".codePointAt(0).toString(16)); // first decimal unicode is 78 then converts to hex value in string format 4e
 console.log(buff.toString());
 
 const buffer = Buffer.from("Erfan"); //saved in unicode
