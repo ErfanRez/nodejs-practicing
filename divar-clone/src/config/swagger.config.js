@@ -5,8 +5,8 @@ function swaggerConfig(app) {
   const swaggerDocument = swaggerJsDoc({
     swaggerDefinition: {
       info: {
-        title: "divar-backend",
-        description: "divar website backend using ExpressJs",
+        title: "Divar Backend",
+        description: "Divar website backend using Express.js",
         version: "1.0.0",
       },
     },
