@@ -52,7 +52,7 @@ class AuthService {
       user.verifiedMobile = true;
     }
 
-    const accessToken = AuthService.signToken({ mobile, userId: user._id });
+    const accessToken = AuthService.signToken({ mobile, id: user._id });
     user.accessToken = accessToken;
     await user.save();
 
