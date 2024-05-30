@@ -4,6 +4,7 @@ const swaggerConfig = require("./src/config/swagger.config");
 const mainRouter = require("./src/app.routes");
 const notFoundHandler = require("./src/common/exceptions/not-found.handler");
 const allExceptionHandler = require("./src/common/exceptions/all-exception.handler");
+const cookieParser = require("cookie-parser");
 
 async function main() {
   const app = express();
@@ -11,6 +12,7 @@ async function main() {
   require("./src/config/mongoose.config");
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(cookieParser(process.env.COOKIE_SECRET_KEY));
   app.use(mainRouter);
   swaggerConfig(app);
 
