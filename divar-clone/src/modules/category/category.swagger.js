@@ -39,7 +39,7 @@
  *                      schema:
  *                        $ref: "#/components/schemas/createCategory"
  *      responses:
- *          200:
+ *          201:
  *               description: success
  */
 
