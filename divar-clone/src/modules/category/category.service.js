@@ -13,7 +13,7 @@ class CategoryService {
   }
 
   async find() {
-    return await this.#model.find({ parent: { $exists: false } });
+    return await this.#model.find({ parent: { $exists: false } }).lean();
   }
 
   async create(categoryDto) {
