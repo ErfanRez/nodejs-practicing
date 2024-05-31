@@ -1,6 +1,6 @@
 const { Schema, Types, model } = require("mongoose");
 
-const PostSchema = Schema({
+const PostSchema = new Schema({
   title: { type: String, required: true },
   content: { type: String, require: true },
   category: { type: Types.ObjectId, ref: "category", required: true },
