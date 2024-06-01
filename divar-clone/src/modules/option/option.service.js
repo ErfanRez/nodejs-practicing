@@ -15,29 +15,28 @@ class OptionService {
     this.#categoryService = categoryService;
   }
 
+  async checkExistById(id) {
+    const option = await this.#model.findById(id);
+    if (!option) throw new createHttpError.NotFound(OptionMessages.notFount);
+    return option;
+  }
+
+  async alreadyExistByCategoryAndKey(key, category, exceptionId = null) {
+    const isExist = await this.#model.findOne({
+      category,
+      key,
+      _id: { $ne: exceptionId },
+    });
+    if (isExist)
+      throw new createHttpError.Conflict(OptionMessages.alreadyExist);
+    return;
+  }
+
   async findAll() {
     const options = await this.#model
       .find({}, { __v: 0 }, { sort: { _id: -1 } })
       .populate([{ path: "category", select: { name: 1, slug: 1 } }]);
     return options;
-  }
-
-  async create(optionDto) {
-    const category = await this.#categoryService.checkExistById(
-      optionDto.category
-    );
-    optionDto.category = category._id;
-    optionDto.key = slugify(optionDto.key, {
-      trim: true,
-      replacement: "_",
-      lower: true,
-    });
-    await this.alreadyExistByCategoryAndKey(optionDto.key, category._id);
-    if (optionDto?.enum && typeof optionDto.enum === "string") {
-      optionDto.enum = optionDto.enum.split(",");
-    } else if (!Array.isArray(optionDto.enum)) optionDto.enum = [];
-    const option = await this.#model.create(optionDto);
-    return option;
   }
 
   async findById(id) {
@@ -86,21 +85,27 @@ class OptionService {
     return options;
   }
 
-  async checkExistById(id) {
-    const option = await this.#model.findById(id);
-    if (!option) throw new createHttpError.NotFound(OptionMessages.notFount);
+  async create(optionDto) {
+    const category = await this.#categoryService.checkExistById(
+      optionDto.category
+    );
+    optionDto.category = category._id;
+    optionDto.key = slugify(optionDto.key, {
+      trim: true,
+      replacement: "_",
+      lower: true,
+    });
+    await this.alreadyExistByCategoryAndKey(optionDto.key, category._id);
+    if (optionDto?.enum && typeof optionDto.enum === "string") {
+      optionDto.enum = optionDto.enum.split(",");
+    } else if (!Array.isArray(optionDto.enum)) optionDto.enum = [];
+    const option = await this.#model.create(optionDto);
     return option;
   }
 
-  async alreadyExistByCategoryAndKey(key, category, exceptionId = null) {
-    const isExist = await this.#model.findOne({
-      category,
-      key,
-      _id: { $ne: exceptionId },
-    });
-    if (isExist)
-      throw new createHttpError.Conflict(OptionMessages.alreadyExist);
-    return;
+  async removeById(id) {
+    await this.checkExistById(id);
+    return await this.#model.deleteOne({ _id: id });
   }
 }
 module.exports = new OptionService();
