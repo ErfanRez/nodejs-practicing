@@ -105,14 +105,14 @@
  */
 /**
  * @swagger
- * /option/by-category/{categoryId}:
+ * /option/by-category/{catId}:
  *  get:
  *      summary: get all options of category
  *      tags:
  *          -   Option
  *      parameters:
  *          -   in: path
- *              name: categoryId
+ *              name: catId
  *              type: string
  *      responses:
  *          200:
