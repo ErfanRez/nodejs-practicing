@@ -38,6 +38,7 @@ class CategoryService {
   }
 
   async checkExistById(id) {
+    if (!isValidObjectId(id)) throw new createHttpError[400]("Invalid ID!");
     const category = await this.#model.findById(id);
     if (!category)
       throw new createHttpError.NotFound(categoryMessages.notFount);
