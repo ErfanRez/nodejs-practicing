@@ -4,7 +4,7 @@ const createHttpError = require("http-errors");
 const OptionMessages = require("./option.messages");
 const { default: slugify } = require("slugify");
 const categoryService = require("../category/category.service");
-const { isValidObjectId } = require("mongoose");
+const { isTrue, isFalse } = require("../../common/utils/functions");
 
 class OptionService {
   #model;
@@ -99,6 +99,10 @@ class OptionService {
     if (optionDto?.enum && typeof optionDto.enum === "string") {
       optionDto.enum = optionDto.enum.split(",");
     } else if (!Array.isArray(optionDto.enum)) optionDto.enum = [];
+
+    if (isTrue(optionDto?.required)) optionDto.required = true;
+    if (isFalse(optionDto?.required)) optionDto.required = false;
+
     const option = await this.#model.create(optionDto);
     return option;
   }

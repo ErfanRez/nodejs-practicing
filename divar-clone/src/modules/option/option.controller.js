@@ -51,7 +51,15 @@ class OptionController {
 
   async create(req, res, next) {
     try {
-      const { title, key, guide, enum: list, type, category } = req.body;
+      const {
+        title,
+        key,
+        guide,
+        enum: list,
+        type,
+        category,
+        required,
+      } = req.body;
       await this.#service.create({
         title,
         key,
@@ -59,6 +67,7 @@ class OptionController {
         enum: list,
         type,
         category,
+        required,
       });
 
       return res.status(HttpCodes.CREATED).json({
