@@ -78,6 +78,36 @@ class OptionController {
     }
   }
 
+  async update(req, res, next) {
+    try {
+      const {
+        title,
+        key,
+        guide,
+        enum: list,
+        type,
+        category,
+        required,
+      } = req.body;
+      const { id } = req.params;
+      await this.#service.update(id, {
+        title,
+        key,
+        guide,
+        enum: list,
+        type,
+        category,
+        required,
+      });
+
+      return res.json({
+        message: optionMessages.updated,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async removeById(req, res, next) {
     try {
       const { id } = req.params;
