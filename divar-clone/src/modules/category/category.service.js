@@ -4,12 +4,40 @@ const { isValidObjectId, Types } = require("mongoose");
 const createHttpError = require("http-errors");
 const categoryMessages = require("./category.messages");
 const slugify = require("slugify");
+const OptionModel = require("../option/option.model");
 
 class CategoryService {
   #model;
+  #optionModel;
   constructor() {
     autoBind(this);
     this.#model = CategoryModel;
+    this.#optionModel = OptionModel;
+  }
+
+  async checkExistById(id) {
+    if (!isValidObjectId(id)) throw new createHttpError[400]("Invalid ID!");
+    const category = await this.#model.findById(id);
+    if (!category)
+      throw new createHttpError.NotFound(categoryMessages.notFount);
+
+    return category;
+  }
+
+  async checkExistBySlug(slug) {
+    const category = this.#model.findOne({ slug });
+    if (!category)
+      throw new createHttpError.NotFound(categoryMessages.notFount);
+
+    return category;
+  }
+
+  async duplicateSlug(slug) {
+    const category = await this.#model.findOne({ slug });
+    if (category)
+      throw new createHttpError.Conflict(categoryMessages.alreadyExist);
+
+    return;
   }
 
   async find() {
@@ -37,27 +65,11 @@ class CategoryService {
     return category;
   }
 
-  async checkExistById(id) {
-    if (!isValidObjectId(id)) throw new createHttpError[400]("Invalid ID!");
-    const category = await this.#model.findById(id);
-    if (!category)
-      throw new createHttpError.NotFound(categoryMessages.notFount);
-
-    return category;
-  }
-
-  async checkExistBySlug(slug) {
-    const category = this.#model.findOne({ slug });
-    if (!category)
-      throw new createHttpError.NotFound(categoryMessages.notFount);
-
-    return category;
-  }
-
-  async duplicateSlug(slug) {
-    const category = await this.#model.findOne({ slug });
-    if (category)
-      throw new createHttpError.Conflict(categoryMessages.alreadyExist);
+  async remove(id) {
+    await this.checkExistById(id);
+    await this.#optionModel.deleteMany({ category: id }).then(async () => {
+      await this.#model.deleteMany({ __id: id });
+    });
 
     return;
   }
