@@ -9,7 +9,7 @@
  * @swagger
  *  components:
  *      schemas:
- *          CreateOption:
+ *          CreateOption: 
  *              type: object
  *              required:
  *                  -   title
@@ -23,7 +23,7 @@
  *                      type: string
  *                  category:
  *                      type: string
- *                  guide:
+ *                  guid:
  *                      type: string
  *                  required:
  *                      type: boolean
@@ -38,7 +38,7 @@
  *                      type: array
  *                      items:
  *                          type: string
- *          UpdateOption:
+ *          UpdateOption: 
  *              type: object
  *              properties:
  *                  title:
@@ -47,7 +47,7 @@
  *                      type: string
  *                  category:
  *                      type: string
- *                  guide:
+ *                  guid:
  *                      type: string
  *                  required:
  *                      type: boolean
@@ -62,7 +62,7 @@
  *                      type: array
  *                      items:
  *                          type: string
- *
+ *                  
  */
 
 /**
@@ -81,7 +81,7 @@
  *                  schema:
  *                      $ref: '#/components/schemas/CreateOption'
  *      responses:
- *          201:
+ *          201: 
  *              description: created
  */
 /**
@@ -100,22 +100,22 @@
  *                  schema:
  *                      $ref: '#/components/schemas/UpdateOption'
  *      responses:
- *          201:
+ *          201: 
  *              description: created
  */
 /**
  * @swagger
- * /option/by-category/{catId}:
+ * /option/by-category/{categoryId}:
  *  get:
  *      summary: get all options of category
  *      tags:
  *          -   Option
  *      parameters:
- *          -   in: path
- *              name: catId
+ *          -   in: path        
+ *              name: categoryId
  *              type: string
  *      responses:
- *          200:
+ *          200: 
  *              description: successfully
  */
 /**
@@ -126,11 +126,11 @@
  *      tags:
  *          -   Option
  *      parameters:
- *          -   in: path
+ *          -   in: path        
  *              name: slug
  *              type: string
  *      responses:
- *          200:
+ *          200: 
  *              description: successfully
  */
 /**
@@ -141,11 +141,11 @@
  *      tags:
  *          -   Option
  *      parameters:
- *          -   in: path
+ *          -   in: path        
  *              name: id
  *              type: string
  *      responses:
- *          200:
+ *          200: 
  *              description: successfully
  */
 /**
@@ -156,7 +156,7 @@
  *      tags:
  *          -   Option
  *      responses:
- *          200:
+ *          200: 
  *              description: successfully
  */
 /**
@@ -167,10 +167,10 @@
  *      tags:
  *          -   Option
  *      parameters:
- *          -   in: path
+ *          -   in: path        
  *              name: id
  *              type: string
  *      responses:
- *          200:
+ *          200: 
  *              description: deleted successfully
  */

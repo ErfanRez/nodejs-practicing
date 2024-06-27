@@ -2,15 +2,15 @@
  * @swagger
  * tags:
  *  name: User
- *  description: User modules and routes
+ *  description: User Module and Routes
  */
 
 /**
  * @swagger
  *  components:
  *      schemas:
- *          sendOTP:
- *              type:  object
+ *          SendOTP:
+ *              type: object
  *              required:
  *                  -   mobile
  *              properties:
@@ -20,13 +20,13 @@
 
 /**
  * @swagger
- *
- * /user/profile:
+ * 
+ * /user/whoami:
  *  get:
- *      summary: Get user profile
+ *      summary: get user profile
  *      tags:
  *          -   User
  *      responses:
  *          200:
- *               description: success
+ *              description: success
  */

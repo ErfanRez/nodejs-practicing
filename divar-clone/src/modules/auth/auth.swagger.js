@@ -2,22 +2,22 @@
  * @swagger
  * tags:
  *  name: Auth
- *  description: Auth modules and routes
+ *  description: Auth Module and Routes
  */
 
 /**
  * @swagger
  *  components:
  *      schemas:
- *          sendOTP:
- *              type:  object
+ *          SendOTP:
+ *              type: object
  *              required:
  *                  -   mobile
  *              properties:
  *                  mobile:
  *                      type: string
- *          checkOTP:
- *              type:  object
+ *          CheckOTP:
+ *              type: object
  *              required:
  *                  -   mobile
  *                  -   code
@@ -30,55 +30,53 @@
 
 /**
  * @swagger
- *
+ * 
  * /auth/send-otp:
  *  post:
- *      summary: login with one time password
+ *      summary: login with OTP in this end-point
  *      tags:
  *          -   Auth
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
  *                  schema:
- *                      $ref: "#/components/schemas/sendOTP"
+ *                      $ref: '#/components/schemas/SendOTP'
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/sendOTP"
+ *                      $ref: '#/components/schemas/SendOTP'
  *      responses:
  *          200:
- *               description: success
+ *              description: success
  */
-
 /**
  * @swagger
- *
+ * 
  * /auth/check-otp:
  *  post:
- *      summary: check otp to login user
+ *      summary: check otp for login user
  *      tags:
  *          -   Auth
  *      requestBody:
  *          content:
  *              application/x-www-form-urlencoded:
  *                  schema:
- *                      $ref: "#/components/schemas/checkOTP"
+ *                      $ref: '#/components/schemas/CheckOTP'
  *              application/json:
  *                  schema:
- *                      $ref: "#/components/schemas/checkOTP"
+ *                      $ref: '#/components/schemas/CheckOTP'
  *      responses:
  *          200:
- *               description: success
+ *              description: success
  */
-
 /**
  * @swagger
- *
+ * 
  * /auth/logout:
  *  get:
- *      summary: logout user
+ *      summary: logout user 
  *      tags:
  *          -   Auth
  *      responses:
  *          200:
- *               description: success
+ *              description: success
  */
