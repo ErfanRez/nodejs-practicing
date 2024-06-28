@@ -4,12 +4,12 @@ const homeController = require("../../controllers/api/home.controller");
 /**
  * @swagger
  * tags:
- *    name: IndexPage
+ *    name: Index Page
  *    description: Index page route and data
  * /:
  *   get:
  *    summary: index of routes
- *    tags: [IndexPage]
+ *    tags: [Index Page]
  *    description: get all needed data for index page
  *    responses:
  *         200:

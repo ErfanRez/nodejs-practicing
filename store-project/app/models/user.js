@@ -4,14 +4,14 @@ const schema = new Schema({
   first_name: { type: String },
   last_name: { type: String },
   username: { type: String, lowerCase: true },
-  phone: { type: String },
+  mobile: { type: String, required: true },
   email: { type: String, lowerCase: true },
   password: { type: String },
   otp: {
     type: Object,
     default: {
       code: 0,
-      expires: o,
+      expiresIn: 0,
     },
   },
   bills: { type: [], default: [] },
