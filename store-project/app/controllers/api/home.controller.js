@@ -1,8 +1,14 @@
+const createHttpError = require("http-errors");
+const { authSchema } = require("../../http/validators/user/auth.schema");
 const Controller = require("../controller");
 
 class HomeController extends Controller {
-  indexPage(req, res, next) {
-    return res.status(200).json("Index Page Store");
+  async indexPage(req, res, next) {
+    try {
+      return res.status(200).json("Index Page Store");
+    } catch (error) {
+      next(error);
+    }
   }
 }
 
