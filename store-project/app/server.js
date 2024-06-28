@@ -4,6 +4,9 @@ const path = require("path");
 const { AllRoutes } = require("./router/router");
 const morgan = require("morgan");
 const createError = require("http-errors");
+const swaggerUI = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+const { url } = require("inspector");
 
 class App {
   #app = express();
@@ -24,6 +27,27 @@ class App {
     this.#app.use(express.json());
     this.#app.use(express.urlencoded({ extended: true }));
     this.#app.use(express.static(path.join(__dirname, "..", "public")));
+    this.#app.use(
+      "/api-doc",
+      swaggerUI.serve,
+      swaggerUI.setup(
+        swaggerJsDoc({
+          swaggerDefinition: {
+            info: {
+              title: "NodeJS Store Project",
+              version: "2.0.0",
+              description: "NodeJS Advanced Store Project",
+            },
+            servers: [
+              {
+                url: "http://localhost:5000",
+              },
+            ],
+          },
+          apis: ["./app/router/*/*.js"],
+        })
+      )
+    );
   }
 
   createServer() {
