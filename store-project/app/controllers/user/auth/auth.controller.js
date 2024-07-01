@@ -56,6 +56,13 @@ class UserAuthController extends Controller {
     }
   }
 
+  async refreshToken(req, res, next) {
+    try {
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async saveUSer(mobile, code) {
     let otp = {
       code,
