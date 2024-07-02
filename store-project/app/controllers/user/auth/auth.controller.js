@@ -6,6 +6,8 @@ const {
 const {
   randomOtpGenerator,
   signAccessToken,
+  verifyRefreshToken,
+  signRefreshToken,
 } = require("../../../utils/functions");
 const { UserModel } = require("../../../models/user");
 const { EXPIRES_IN, USER_ROLE } = require("../../../utils/constants");
@@ -45,10 +47,12 @@ class UserAuthController extends Controller {
         throw createHttpError.Unauthorized("OTP code expired!");
 
       const accessToken = await signAccessToken(user._id);
+      const refreshToken = await signRefreshToken(user._id);
 
       return res.json({
         data: {
           accessToken,
+          refreshToken,
         },
       });
     } catch (error) {
@@ -58,6 +62,17 @@ class UserAuthController extends Controller {
 
   async refreshToken(req, res, next) {
     try {
+      const { refreshToken } = req.body;
+      const mobile = await verifyRefreshToken(refreshToken);
+      const user = await UserModel.findOne({ mobile });
+      const accessToken = await signAccessToken(user._id);
+      const newRefreshToken = await signRefreshToken(user._id);
+      return res.json({
+        data: {
+          accessToken,
+          refreshToken: newRefreshToken,
+        },
+      });
     } catch (error) {
       next(error);
     }
