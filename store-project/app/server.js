@@ -17,6 +17,7 @@ class App {
     this.#DB_URI = DB_URI;
     this.configApp();
     this.connectToMongoDB();
+    this.initRedis();
     this.createServer();
     this.createRoutes();
     this.errorHandling();
@@ -73,6 +74,10 @@ class App {
       await mongoose.connection.close();
       process.exit(0);
     });
+  }
+
+  initRedis() {
+    require("./utils/init_redis");
   }
 
   createRoutes() {
