@@ -1,1 +1,0 @@
-In this repository, I combined all my practice projects using pure NodeJS, Express, Fastify, and KoaJS from the very basic API development to documenting, WebSockets, GraphQL, Microservices, developing Telegram bot, and more, all in one repo. Hope you enjoy it 😉.
